@@ -30,6 +30,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', 'password', 'auth_key', 'access_token'], 'required'],
+            ['username','unique','targetClass'=>'\app\models\User','message'=>'Username is Alredy Taken, Try Another!'],
             [['username'], 'string', 'max' => 55],
             [['password', 'auth_key', 'access_token'], 'string', 'max' => 255],
         ];

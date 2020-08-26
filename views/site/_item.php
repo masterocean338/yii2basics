@@ -12,4 +12,6 @@ use yii\helpers\Html;
             <p><?= Html::encode($model->first_name) ?></p>
             <p><?= Html::encode($model->last_name) ?></p>
             <p><?php echo date('Y-m-d H:i:s')  ?></p>
+            <p> Test Params:<?= $testParams ?></p>
+
 </div>

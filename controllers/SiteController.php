@@ -90,8 +90,8 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            /*return $this->goHome();*/
-            return $this->render('hello');
+            return $this->goHome();
+            /*return $this->render('hello');*/
         }
 
 
@@ -121,8 +121,9 @@ class SiteController extends Controller
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()){
-            Yii::$app->session->addFlash('SIGNUP', 'You have successfully registered');
-            return $this->redirect(Yii::$app->homeUrl);
+            Yii::$app->session->addFlash('success', 'You have successfully registered,Please LogIn');
+           // return $this->redirect(Yii::$app->homeUrl);
+           return $this->redirect('/site/login');
         }
 
         return $this->render('signup', [
@@ -183,7 +184,14 @@ class SiteController extends Controller
         return $this->render('grid');
     }
     public function actionList(){
-        return $this->render('list');
+        $searchModel= new ClientSearch();
+        $dataProvider= $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list',[
+            'searchModel'=>$searchModel,
+            'dataProvider'=>$dataProvider,
+        ]);
+        //return $this->render('list');
     }
     public function actionSearch(){
         $searchModel= new ClientSearch();

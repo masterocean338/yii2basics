@@ -7,21 +7,27 @@ use yii\helpers\Html;
 
 
 
-    $dataProvider= new ActiveDataProvider([
+  /*  $dataProvider= new ActiveDataProvider([
         'query'=> Client::find(),
         'pagination'=>[
             'pageSize'=>4,
         ]
-    ]);
+    ]);*/
 
 
 ?>
 <h2>User List</h2>
+<?php echo $this->render('searchform',['model'=>$searchModel])?>
+
 <?php
 
 echo ListView::widget([
     'dataProvider' => $dataProvider,
     'itemView'=>'_item',
+    'viewParams'=>['testParams'=>1],
+    'separator'=>"<hr/>",
+   // 'options'=> ['class'=>'list-view well'],
+    'itemOptions'=>['class'=>'well']
    /* 'itemView' => function($model,$key,$index,$widget){
         ?>
         <div>
